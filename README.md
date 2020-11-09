@@ -11,6 +11,7 @@ You will build a software engineering team generator command line application. T
 As a manager
 I want to generate a webpage that displays my team's basic info
 so that I have quick access to emails and GitHub profiles
+
 ```
 
 How do you deliver this? Here are some guidelines:
