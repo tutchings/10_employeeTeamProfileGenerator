@@ -121,8 +121,6 @@ async function init() {
 
             await createEmployeeObject(employeeTypeResponse, globalPromptResponse, specificPromptResponse);
 
-            console.log('Employee Array: ', employeeArray);
-
             const anotherEmployeeResponse = await anotherEmployee();
     
             if(!anotherEmployeeResponse.addEmployee){
