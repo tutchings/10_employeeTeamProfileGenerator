@@ -2,6 +2,58 @@
 
 One of the most important aspects of programming is writing code that is readable, reliable, and maintainable. Oftentimes, *how* we design our code is just as important as the code itself. In this homework assignment, your challenge is to build a Node CLI that takes in information about employees and generates an HTML webpage that displays summaries for each person. Since testing is a key piece in making code maintainable, you will also be ensuring that all unit tests pass.
 
+## Program Demo
+
+![Readme Generator Demo](https://github.com/tutchings/9_readmeGenerator/blob/master/readmeGeneratorDemo.gif)
+
+<br />
+
+## Installation Demo
+
+![Installation Demo](https://github.com/tutchings/9_readmeGenerator/blob/master/installationDemo.gif)
+
+<br />
+
+## Installation and Usage Instructions
+
+1. Navigate to the project repo: [Employee Team Profile Generator](https://github.com/tutchings/10_employeeTeamProfileGenerator)
+
+2. Download the zip folder of the project files
+
+3. Save the files to computer and unzip
+
+4. Open a terminal and navigate to the project folder within the terminal
+
+5. Once at the project folder within the terminal, enter "npm i" to install all dependencies for the project
+
+6. Once the dependencies have been downloaded, enter "node app.js" in the terminal to run the program
+
+7. Answer each question when prompted
+
+8. When all prompts have been answered, an html file (team.html) will be generated based on the answers provided to the various prompts. team.html can be found in the output folder.
+
+9. Navigate to the output folder to see the newly generated HTML file. Open the HTML file in your preferred browser to see the completed Employee Team Profile Page.
+
+<br />
+
+## Testing Demo
+
+![Installation Demo](https://github.com/tutchings/9_readmeGenerator/blob/master/installationDemo.gif)
+
+<br />
+
+## Testing Instructions
+
+1. Navigate to the project folder within the terminal
+
+2. Ensure all dependencies have been downloaded (enter "npm i" in the terminal if dependencies have not been downloaded yet)
+
+3. Once dependencies are downloaded, enter "npm run test" in the terminal to run the tests
+
+4. Test results will be displayed in the terminal when all tests have run
+
+<br />
+
 
 ## Instructions
 
@@ -19,11 +71,6 @@ How do you deliver this? Here are some guidelines:
 * Use the [Inquirer npm package](https://github.com/SBoudrias/Inquirer.js/) to prompt the user for their email, id, and specific information based on their role with the company. For instance, an intern may provide their school, whereas an engineer may provide their GitHub username.
 
 * Your app will run as a Node CLI to gather information about each employee.
-
-* Below is an example of what your application may look like. Remember, the styling is completely up to you so try to make it unique.
-
-![Employee Summary 1](./Assets/10-OOP-homework-demo-1.png)
-![Employee Summary 2](./Assets/10-OOP-homework-demo-2.png)
 
 In the `Develop` folder, there is a `package.json`, so make sure to `npm install`.
 
