@@ -1,3 +1,4 @@
+//node requirements
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
@@ -11,16 +12,17 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+//promisify writeFile
 const writeHTML = util.promisify(fs.writeFile);
 
+//global variable declarations
 const employeeTypes = ['Manager', 'Engineer', 'Intern'];
 let addAnotherEmployee = true;
 let employeeArray = [];
 
 
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
 
+//function to prompt the user for the type of employee to add to the employee team
 const promptEmployeeType = () => {
     return inquirer.prompt([
         {
@@ -32,6 +34,9 @@ const promptEmployeeType = () => {
     ]);
 } // end function prompt EmployeeType
 
+
+
+//function that asks the user global employee prompts (those that are shared between all employees, regardless of the employee type)
 const globalEmployeePrompts = () => {
     return inquirer.prompt([
         {
@@ -52,10 +57,16 @@ const globalEmployeePrompts = () => {
     ]);
 } //end function employeePrompts()
 
+
+
+//function that asks the user specific employee prompts (those that are specific to the employee type)
+//the function accepts the response from the promptEmployeeType() function as its argument
 const specificEmployeePrompts = (employeeTypeResponse) => {
 
+    //sets employeeType variable equal to the employee type returned from the promptmployeeType() function
     const employeeType = employeeTypeResponse.employeeType;
 
+    //asks the user a prompt based on the employee type returned from the promptEmployeeType() function
     if (employeeType === 'Manager'){
         return inquirer.prompt([
             {
@@ -80,9 +91,13 @@ const specificEmployeePrompts = (employeeTypeResponse) => {
                 name: 'school'
             }
         ]);
-    }
+    } //end if/else conditional
+
 } //end function specificEmployeePrompts()
 
+
+
+//function that prompts the user if they want to add another employee to the employee team
 const anotherEmployee  = () => {
     return inquirer.prompt([
         {
@@ -93,9 +108,18 @@ const anotherEmployee  = () => {
     ]);
 }
 
+
+
+//function that accepts the responses from the previous three functions as arguments and creates employee objects based on the responses.
 const createEmployeeObject = (employeeTypeResponse, globalPromptResponse, specificPromptResponse) => {
+
+    //sets employeeType variable equal to the employee type returned from the promptmployeeType() function
     const employeeType = employeeTypeResponse.employeeType;
 
+
+    //creates a new employee object based on the employee type that was returned from the promptEmployeeType() function
+    //uses the manager, engineer, and intern classes (all of which depend on the employee class) to create employee objects
+    //pushes the created employee object to the employeeArray
     if(employeeType === 'Manager'){
         const manager = new Manager (globalPromptResponse.name, globalPromptResponse.id, globalPromptResponse.email, specificPromptResponse.officeNumber);
         employeeArray.push(manager);
@@ -105,28 +129,42 @@ const createEmployeeObject = (employeeTypeResponse, globalPromptResponse, specif
     } else if(employeeType === 'Intern'){
         const intern = new Intern (globalPromptResponse.name, globalPromptResponse.id, globalPromptResponse.email, specificPromptResponse.school);
         employeeArray.push(intern);
-    }
-}
+    } //end if/else conditional
+
+} //end createEmployeeObject() function
+
+
+
 
 async function init() {
 
     try {
 
+        //while loop that runs the following code whenever user wants to add a new employee team profile
         while(addAnotherEmployee){
+
+            //runs the promptEmployeeType() function and stores response in employeeTypeResponse variable
             const employeeTypeResponse = await promptEmployeeType();
-        
+
+            //runs the globalEmployeePrompts() function and stores response in globalPromptResponse variable
             const globalPromptResponse = await globalEmployeePrompts();
-            
+
+            //runs the specificEmployeePrompts() function and stores response in specificPromptResponse variable
             const specificPromptResponse = await specificEmployeePrompts(employeeTypeResponse);
 
+            //passes the responses from the previous three functions to the createEmployeeObject() function 
+            //createEmployeeObject function creates an employee object based on the responses passed to the function then pushes the created object to the employeeArray
             await createEmployeeObject(employeeTypeResponse, globalPromptResponse, specificPromptResponse);
 
+            //runs the anotherEmployee() function and stores the response in anotherEmployeeResponse variable
             const anotherEmployeeResponse = await anotherEmployee();
     
+            //if anotherEmployeeResponse.addEmployee === false, set addAnotherEmployee variable equal to false which breaks out of the while loop
             if(!anotherEmployeeResponse.addEmployee){
                 addAnotherEmployee = false;
             }
-        }
+
+        } //end while loop
 
     } catch(err) {
         console.log(err);
@@ -136,46 +174,30 @@ async function init() {
 
 
 
-
-
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
-
-
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
-
 async function writeHTMLFile() {
+
+    //ensures init() function completel runs before running any subsequent code
     await init();
 
+    //passes employeeArray to render function which renders html based on the employee team the user input
+    //saves rendered html in html variable
     const html = render(employeeArray);
 
+    //if an output folder does not exist in the project directory, create an output folder
     if (!fs.existsSync('./output')){
         fs.mkdir('./output', function(err) {
             if (err) {
                 console.log(err);
             }
         });
-    }
+    } //end if conditional
     
+    //write the html to team.html and store file in the output folder
     await writeHTML('./output/team.html', html);
-}
+
+} //end async function writeHTMLFile()
 
 
 
-
-// HINT: each employee type (manager, engineer, or intern) has slightly different
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
-
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```
-
+//runs code for the program
 writeHTMLFile();
