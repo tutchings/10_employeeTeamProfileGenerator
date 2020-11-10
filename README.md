@@ -2,17 +2,9 @@
 
 One of the most important aspects of programming is writing code that is readable, reliable, and maintainable. Oftentimes, *how* we design our code is just as important as the code itself. In this homework assignment, your challenge is to build a Node CLI that takes in information about employees and generates an HTML webpage that displays summaries for each person. Since testing is a key piece in making code maintainable, you will also be ensuring that all unit tests pass.
 
-## Program Demo
-
-![Readme Generator Demo](https://github.com/tutchings/9_readmeGenerator/blob/master/readmeGeneratorDemo.gif)
 
 <br />
 
-## Installation Demo
-
-![Installation Demo](https://github.com/tutchings/9_readmeGenerator/blob/master/installationDemo.gif)
-
-<br />
 
 ## Installation and Usage Instructions
 
@@ -34,13 +26,25 @@ One of the most important aspects of programming is writing code that is readabl
 
 9. Navigate to the output folder to see the newly generated HTML file. Open the HTML file in your preferred browser to see the completed Employee Team Profile Page.
 
-<br />
-
-## Testing Demo
-
-![Installation Demo](https://github.com/tutchings/9_readmeGenerator/blob/master/installationDemo.gif)
 
 <br />
+
+
+## Program Demo
+
+![Employee Team Profile Generator Demo](https://github.com/tutchings/10_employeeTeamProfileGenerator/blob/master/demos/appDemo.gif)
+
+
+<br />
+
+
+## Installation Demo
+
+![Installation Demo](https://github.com/tutchings/10_employeeTeamProfileGenerator/blob/master/demos/installation.gif)
+
+
+<br />
+
 
 ## Testing Instructions
 
@@ -51,6 +55,15 @@ One of the most important aspects of programming is writing code that is readabl
 3. Once dependencies are downloaded, enter "npm run test" in the terminal to run the tests
 
 4. Test results will be displayed in the terminal when all tests have run
+
+
+<br />
+
+
+## Testing Demo
+
+![Testing Demo](https://github.com/tutchings/10_employeeTeamProfileGenerator/blob/master/demos/testing.gif)
+
 
 <br />
 
